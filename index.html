@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WM Boutique UK | Business Insights Dashboard 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4f6f9;color:#1a1a2e;font-size:13px}
+.header{background:#1a1a2e;color:#fff;padding:14px 28px;display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:16px;font-weight:700;letter-spacing:.03em}
+.header span{font-size:11px;color:#9ab}
+.badge{background:#2e75b6;color:#fff;font-size:10px;padding:2px 9px;border-radius:10px;margin-left:8px}
+.nav{background:#fff;border-bottom:2px solid #e4e8ee;display:flex;padding:0 28px;gap:4px}
+.nav button{background:none;border:none;padding:11px 18px;font-size:12.5px;cursor:pointer;color:#888;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .18s;font-weight:500}
+.nav button.active{color:#1a1a2e;border-bottom-color:#2e75b6;font-weight:700}
+.nav button:hover{color:#1a1a2e}
+.page{display:none;padding:20px 28px}
+.page.active{display:block}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.kpi{background:#fff;border-radius:8px;padding:14px 18px;border-left:4px solid #2e75b6;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.kpi.g{border-left-color:#1a9e5c}.kpi.a{border-left-color:#d4820a}.kpi.r{border-left-color:#c0392b}
+.kpi label{font-size:9.5px;color:#999;text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:5px}
+.kpi .val{font-size:21px;font-weight:800;color:#1a1a2e;line-height:1}
+.kpi .sub{font-size:10px;color:#bbb;margin-top:3px}
+.kpi .chg{font-size:11px;font-weight:700;margin-top:3px}
+.up{color:#1a9e5c}.dn{color:#c0392b}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.full{margin-bottom:14px}
+.card{background:#fff;border-radius:8px;padding:18px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.card h3{font-size:10px;font-weight:700;color:#aaa;margin-bottom:14px;text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px}
+.q{background:#2e75b6;color:#fff;font-size:9.5px;padding:2px 7px;border-radius:6px}
+.cw{position:relative;height:240px}
+.cw.tall{height:320px}
+.cw.sm{height:190px}
+table{width:100%;border-collapse:collapse;font-size:11.5px}
+th{background:#f7f8fb;color:#777;font-weight:700;text-align:left;padding:7px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1.5px solid #edf0f5}
+td{padding:7px 10px;border-bottom:1px solid #f3f5f8;color:#333}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafbff}
+.pill{display:inline-block;padding:2px 9px;border-radius:7px;font-size:10px;font-weight:700}
+.pg{background:#e5f8ee;color:#0d6b38}.pa{background:#fef4e0;color:#8a5200}.pr{background:#fde9e9;color:#8b1a1a}
+.bar{background:#edf0f5;border-radius:3px;height:5px;margin-top:3px}
+.bf{height:5px;border-radius:3px;background:#2e75b6}
+.bf.g{background:#1a9e5c}.bf.a{background:#d4820a}.bf.r{background:#c0392b}
+.insight{background:#f0f5ff;border-left:3px solid #2e75b6;border-radius:0 7px 7px 0;padding:10px 13px;margin-top:13px;font-size:11.5px;line-height:1.65;color:#333}
+.insight strong{color:#1a3d8f}
+footer{text-align:center;padding:14px;font-size:10px;color:#bbb;background:#fff;margin-top:4px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div><h1>WM Boutique UK <span class="badge">2025</span></h1></div>
+  <span>Business Insights Dashboard &nbsp;|&nbsp; Data as of 31 Dec 2025</span>
+</div>
+
+<nav class="nav">
+  <button class="active" onclick="go('revenue',this)">Revenue &amp; AUM</button>
+  <button onclick="go('clients',this)">Client Insights</button>
+  <button onclick="go('advisors',this)">Advisor Performance</button>
+</nav>
+
+<!-- TAB 1 -->
+<div id="revenue" class="page active">
+  <div class="kpi-grid">
+    <div class="kpi g"><label>Total AUM, Latest</label><div class="val">£967M</div><div class="chg up">&#9650; +113.7% YTD</div></div>
+    <div class="kpi"><label>AUM Start of Year</label><div class="val">£452M</div><div class="sub">01 Jan 2025</div></div>
+    <div class="kpi"><label>Net Invested</label><div class="val">£712M</div><div class="sub">Cumulative inflows</div></div>
+    <div class="kpi g"><label>Unrealised Gain</label><div class="val">£255M</div><div class="chg up">35.8% return on NI</div></div>
+    <div class="kpi"><label>Est. Annual Fee Revenue</label><div class="val">£16.7M</div><div class="sub">Avg AUM x fee rate</div></div>
+    <div class="kpi"><label>Active Accounts</label><div class="val">1,109</div><div class="sub">Across 5 branches</div></div>
+  </div>
+  <div class="row2">
+    <div class="card">
+      <h3><span class="q">Q1a</span>AUM by Branch: Latest Snapshot</h3>
+      <div class="cw"><canvas id="c_branchAum"></canvas></div>
+      <div class="insight"><strong>Leeds leads</strong> with £223.3M. <strong>London has the highest AUM per account</strong> at £846K; Birmingham is the lightest book at £163.4M, representing the greatest growth opportunity.</div>
+    </div>
+    <div class="card">
+      <h3><span class="q">Q3a</span>AUM Growth 2025: YTD Waterfall</h3>
+      <div class="cw"><canvas id="c_waterfall"></canvas></div>
+      <div class="insight">Firm closed 2025 with <strong>£967M AUM, up from £452M (+113.7%)</strong>. Net inflows of £260M and unrealised gains of £255M drove the growth.</div>
+    </div>
+  </div>
+  <div class="full card">
+    <h3><span class="q">Q1a</span>Branch AUM Detail</h3>
+    <table>
+      <thead><tr><th>Branch</th><th>City</th><th>Accounts</th><th>Total AUM</th><th>Avg / Account</th><th>Unrealised Gain</th><th>Gain %</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SB_Leeds</strong></td><td>Leeds</td><td>265</td><td>£223.3M</td><td>£842,753</td><td>£59.6M</td><td><span class="pill pg">36.4%</span></td></tr>
+        <tr><td>SB_Manchester</td><td>Manchester</td><td>225</td><td>£200.2M</td><td>£889,827</td><td>£52.0M</td><td><span class="pill pg">35.1%</span></td></tr>
+        <tr><td>HQ_London</td><td>London</td><td>233</td><td>£197.1M</td><td><strong>£845,778</strong></td><td>£51.1M</td><td><span class="pill pg">35.0%</span></td></tr>
+        <tr><td>SB_Glasgow</td><td>Glasgow</td><td>202</td><td>£182.8M</td><td>£905,167</td><td>£48.7M</td><td><span class="pill pg">36.3%</span></td></tr>
+        <tr><td>SB_Birmingham</td><td>Birmingham</td><td>184</td><td>£163.4M</td><td>£888,144</td><td>£43.7M</td><td><span class="pill pg">36.5%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row2">
+    <div class="card">
+      <h3><span class="q">Q4a</span>Fee Revenue by Branch</h3>
+      <div class="cw"><canvas id="c_fee"></canvas></div>
+    </div>
+    <div class="card">
+      <h3><span class="q">Q4a</span>Fee Revenue Summary</h3>
+      <table>
+        <thead><tr><th>Branch</th><th>Est. Annual Fee</th><th>Share</th></tr></thead>
+        <tbody>
+          <tr><td>SB_Leeds</td><td>£3,868,488</td><td><div class="bar"><div class="bf" style="width:100%"></div></div></td></tr>
+          <tr><td>SB_Manchester</td><td>£3,418,279</td><td><div class="bar"><div class="bf" style="width:88%"></div></div></td></tr>
+          <tr><td>HQ_London</td><td>£3,359,846</td><td><div class="bar"><div class="bf" style="width:87%"></div></div></td></tr>
+          <tr><td>SB_Glasgow</td><td>£3,189,819</td><td><div class="bar"><div class="bf" style="width:82%"></div></div></td></tr>
+          <tr><td>SB_Birmingham</td><td>£2,831,366</td><td><div class="bar"><div class="bf a" style="width:73%"></div></div></td></tr>
+        </tbody>
+      </table>
+      <div class="insight">Total: <strong>£16.7M</strong>. Leeds leads at £3.9M; Birmingham lags at £2.8M. Top advisor: <strong>Niamh Wilson</strong> (Leeds), at approximately £1.3M.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 2 -->
+<div id="clients" class="page">
+  <div class="kpi-grid">
+    <div class="kpi g"><label>Active Clients</label><div class="val">897</div><div class="sub">Is_Active = 1</div></div>
+    <div class="kpi g"><label>Acquired 2025</label><div class="val">99</div><div class="chg up">&#9650; New clients</div></div>
+    <div class="kpi r"><label>Churned 2025</label><div class="val">57</div><div class="chg dn">&#9660; Lost clients</div></div>
+    <div class="kpi g"><label>Net Client Change</label><div class="val">+42</div><div class="sub">Net new 2025</div></div>
+    <div class="kpi g"><label>Transacted within 3 Months</label><div class="val">857</div><div class="chg up">96% of active clients</div></div>
+    <div class="kpi a"><label>Portfolio Return</label><div class="val">34.9%</div><div class="sub">MV vs Net Invested</div></div>
+  </div>
+  <div class="row2">
+    <div class="card">
+      <h3><span class="q">Q1b</span>Risk Profile by Branch</h3>
+      <div class="cw"><canvas id="c_risk"></canvas></div>
+      <div class="insight">All branches dominated by <strong>medium-risk clients (41-56%)</strong>. <strong>Manchester stands out at 28% high-risk;</strong> a suitability assessment review is recommended.</div>
+    </div>
+    <div class="card">
+      <h3><span class="q">Q2b</span>Client Transaction Recency</h3>
+      <div class="cw sm"><canvas id="c_recency"></canvas></div>
+      <div class="insight"><strong>96% of clients transacted within 3 months.</strong> The 21 inactive clients represent approximately £125K in potential lost revenue.</div>
+    </div>
+  </div>
+  <div class="row2">
+    <div class="card">
+      <h3><span class="q">Q3b</span>Client Portfolio Performance Bands (MV/NI)</h3>
+      <div class="cw"><canvas id="c_perf"></canvas></div>
+      <div class="insight"><strong>658 clients (73.4%) outperformed</strong> the 10-year S&P 500 return of 12.25%. Of 197 clients below expected, 27 opened accounts in 2025.</div>
+    </div>
+    <div class="card">
+      <h3><span class="q">Q4b</span>Client Acquisition vs Churn 2025: Waterfall</h3>
+      <div class="cw sm"><canvas id="c_churn"></canvas></div>
+      <div class="insight">Despite <strong>+42 net new clients</strong>, fee impact is <strong>negative at -£572K</strong>. Advisors to watch: <strong>Mackenzie, Lewis and Roberts</strong>.</div>
+    </div>
+  </div>
+  <div class="full card">
+    <h3><span class="q">Q1b</span>Risk Tolerance Detail by Branch</h3>
+    <table>
+      <thead><tr><th>Branch</th><th>City</th><th>Total</th><th>Low</th><th>Medium</th><th>High</th><th>High %</th></tr></thead>
+      <tbody>
+        <tr><td>HQ_London</td><td>London</td><td>174</td><td>59 (34%)</td><td>95 (55%)</td><td>20 (11%)</td><td><span class="pill pg">11%</span></td></tr>
+        <tr><td>SB_Leeds</td><td>Leeds</td><td>192</td><td>69 (36%)</td><td>92 (48%)</td><td>31 (16%)</td><td><span class="pill pg">16%</span></td></tr>
+        <tr><td>SB_Glasgow</td><td>Glasgow</td><td>161</td><td>50 (31%)</td><td>82 (51%)</td><td>29 (18%)</td><td><span class="pill pa">18%</span></td></tr>
+        <tr><td>SB_Birmingham</td><td>Birmingham</td><td>141</td><td>44 (31%)</td><td>69 (49%)</td><td>28 (20%)</td><td><span class="pill pa">20%</span></td></tr>
+        <tr><td><strong>SB_Manchester</strong></td><td>Manchester</td><td>172</td><td>52 (30%)</td><td>71 (41%)</td><td><strong>49 (28%)</strong></td><td><span class="pill pr">28%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TAB 3 -->
+<div id="advisors" class="page">
+  <div class="kpi-grid">
+    <div class="kpi"><label>Total Advisors</label><div class="val">25</div><div class="sub">5 per branch</div></div>
+    <div class="kpi g"><label>On / Above Target</label><div class="val">7</div><div class="chg up">100% of AUM target</div></div>
+    <div class="kpi a"><label>Within 10% of Target</label><div class="val">1</div><div class="sub">90-100%</div></div>
+    <div class="kpi r"><label>Below Target</label><div class="val">17</div><div class="chg dn">All &#163;100M advisors</div></div>
+    <div class="kpi g"><label>Top Performer</label><div class="val">144%</div><div class="sub">Lucas King, Manchester</div></div>
+    <div class="kpi r"><label>Bottom Performer</label><div class="val">21%</div><div class="sub">Ryan Martin, Glasgow</div></div>
+  </div>
+  <div class="row2">
+    <div class="card">
+      <h3><span class="q">Q2a</span>Advisor AUM vs Target (%)</h3>
+      <div class="cw tall"><canvas id="c_advisor"></canvas></div>
+    </div>
+    <div class="card">
+      <h3><span class="q">Q2a</span>Target Achievement by Tier</h3>
+      <div class="cw sm"><canvas id="c_tier"></canvas></div>
+      <div class="insight"><strong>All &#163;30M advisors are on or above target.</strong> Mixed results in the &#163;50M tier. <strong>All &#163;100M advisors are underperforming;</strong> targets likely need to be reviewed firm-wide.</div>
+    </div>
+  </div>
+  <div class="full card">
+    <h3><span class="q">Q2a</span>Full Advisor AUM Target Table</h3>
+    <table>
+      <thead><tr><th>Advisor</th><th>Branch</th><th>Actual AUM</th><th>Target</th><th>% of Target</th><th>Status</th></tr></thead>
+      <tbody id="adv_tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<footer>WM Boutique UK | Data Management Module | 2025 Synthetic Data</footer>
+
+<script>
+Chart.register(ChartDataLabels);
+
+function go(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+const BL='#2e75b6',GR='#1a9e5c',AM='#d4820a',RD='#c0392b',PU='#7d3c98',TE='#16a085';
+const base={responsive:true,maintainAspectRatio:false};
+
+// Branch AUM
+new Chart(document.getElementById('c_branchAum'),{type:'bar',data:{
+  labels:['Leeds','Manchester','London','Glasgow','Birmingham'],
+  datasets:[{label:'Total AUM',data:[223.3,200.2,197.1,182.8,163.4],backgroundColor:[BL,BL,BL,BL,AM],borderRadius:5,barThickness:44}]
+},options:{...base,plugins:{legend:{display:false},datalabels:{anchor:'end',align:'end',offset:2,formatter:v=>'£'+v+'M',color:'#333',font:{size:11,weight:'600'}}},layout:{padding:{top:28}},scales:{x:{grid:{display:false},ticks:{color:'#666'}},y:{display:false,grid:{display:false}}}}});
+
+// AUM Waterfall
+new Chart(document.getElementById('c_waterfall'),{type:'bar',data:{
+  labels:['Opening AUM','Net Inflows','Unrealised Gain','Closing AUM'],
+  datasets:[
+    {label:'base',data:[0,452.4,711.8,0],backgroundColor:'transparent',stack:'s',barThickness:52},
+    {label:'value',data:[452.4,259.4,255.0,966.9],backgroundColor:[BL,GR,TE,BL],stack:'s',borderRadius:4,barThickness:52}
+  ]
+},options:{...base,plugins:{legend:{display:false},datalabels:{display:(ctx)=>ctx.datasetIndex===1,anchor:'end',align:'end',offset:3,formatter:(v,ctx)=>['£452M','£260M','£255M','£967M'][ctx.dataIndex],color:'#333',font:{size:11,weight:'700'}}},layout:{padding:{top:30}},scales:{x:{grid:{display:false},ticks:{color:'#555',font:{size:11}}},y:{display:false,grid:{display:false},stacked:true}}}});
+
+// Fee Revenue
+new Chart(document.getElementById('c_fee'),{type:'bar',data:{
+  labels:['Leeds','Manchester','London','Glasgow','Birmingham'],
+  datasets:[{label:'Fee Revenue',data:[3.87,3.42,3.36,3.19,2.83],backgroundColor:[BL,BL,BL,BL,AM],borderRadius:5,barThickness:44}]
+},options:{...base,plugins:{legend:{display:false},datalabels:{anchor:'end',align:'end',offset:2,formatter:v=>'£'+v+'M',color:'#333',font:{size:11,weight:'600'}}},layout:{padding:{top:28}},scales:{x:{grid:{display:false}},y:{display:false,grid:{display:false}}}}});
+
+// Risk stacked
+new Chart(document.getElementById('c_risk'),{type:'bar',data:{
+  labels:['London','Leeds','Glasgow','Birmingham','Manchester'],
+  datasets:[
+    {label:'Low',data:[34,36,31,31,30],backgroundColor:'#5b9bd5',borderRadius:0},
+    {label:'Medium',data:[55,48,51,49,41],backgroundColor:GR,borderRadius:0},
+    {label:'High',data:[11,16,18,20,28],backgroundColor:RD,borderRadius:0}
+  ]
+},options:{...base,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}},datalabels:{display:(ctx)=>ctx.dataset.data[ctx.dataIndex]>12,formatter:v=>v+'%',color:'#fff',font:{size:10,weight:'700'},anchor:'center',align:'center'}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,display:false,grid:{display:false}}}}});
+
+// Recency
+new Chart(document.getElementById('c_recency'),{type:'bar',data:{
+  labels:['0-3 Months','3-6 Months','+6 Months'],
+  datasets:[{label:'Clients',data:[857,19,21],backgroundColor:[GR,AM,RD],borderRadius:5,barThickness:52}]
+},options:{...base,plugins:{legend:{display:false},datalabels:{anchor:'end',align:'end',offset:3,formatter:v=>v+' clients',color:'#333',font:{size:11,weight:'600'}}},layout:{padding:{top:26}},scales:{x:{grid:{display:false}},y:{display:false,grid:{display:false}}}}});
+
+// Performance bands
+new Chart(document.getElementById('c_perf'),{type:'bar',data:{
+  labels:['Below Expected','Moderate','Good','Strong','Very Strong'],
+  datasets:[{label:'Clients',data:[197,393,227,22,1],backgroundColor:[RD,AM,BL,GR,PU],borderRadius:5,barThickness:44}]
+},options:{...base,plugins:{legend:{display:false},datalabels:{anchor:'end',align:'end',offset:3,formatter:v=>v,color:'#333',font:{size:11,weight:'600'}}},layout:{padding:{top:26}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{display:false,grid:{display:false}}}}});
+
+// Churn Waterfall
+new Chart(document.getElementById('c_churn'),{type:'bar',data:{
+  labels:['Opening Clients','Acquired','Churned','Closing Clients'],
+  datasets:[
+    {label:'base',data:[0,840,939,0],backgroundColor:'transparent',stack:'s',barThickness:52},
+    {label:'value',data:[840,99,57,882],backgroundColor:[BL,GR,RD,BL],stack:'s',borderRadius:4,barThickness:52}
+  ]
+},options:{...base,plugins:{legend:{display:false},datalabels:{display:(ctx)=>ctx.datasetIndex===1,anchor:'end',align:'end',offset:3,formatter:(v,ctx)=>[840,99,57,882][ctx.dataIndex],color:'#333',font:{size:11,weight:'700'}}},layout:{padding:{top:28}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{display:false,grid:{display:false},stacked:true}}}});
+
+// Advisor chart
+const advisors=[
+  ['Lucas King','Manchester',43.3,30,144.4],['Mohammed Mehta','London',42.2,30,140.8],
+  ['Catriona Cooper','Manchester',40.7,30,135.8],['Claire Smith','Birmingham',38.1,30,127.1],
+  ['Oscar Mehta','Manchester',38.0,30,126.5],['Charlotte Murray','Leeds',33.5,30,111.8],
+  ['Evie Rahman','Birmingham',30.8,30,102.6],['Oliver Roberts','Glasgow',29.5,30,98.3],
+  ['Evie Sheikh','Glasgow',44.9,50,89.8],['Hassan Baker','Leeds',25.3,30,84.3],
+  ['Arthur Martin','London',38.2,50,76.4],['Oliver Lewis','London',38.1,50,76.2],
+  ['Niamh Wilson','Leeds',74.1,100,74.1],['Sophie Harris','Leeds',51.8,100,51.8],
+  ['Ahmed Chaudhry','Glasgow',44.8,100,44.8],['Henry Wright','Glasgow',42.7,100,42.7],
+  ['Eilidh Campbell','London',41.3,100,41.3],['Liam Martin','Manchester',40.0,100,40.0],
+  ['Alfie Fraser','Leeds',38.6,100,38.6],['Duncan Mackenzie','Manchester',38.2,100,38.2],
+  ['William Taylor','London',37.2,100,37.2],['Leo Johnson','Birmingham',34.0,100,34.0],
+  ['Fergus Jones','Birmingham',32.8,100,32.8],['Logan Lewis','Birmingham',27.7,100,27.7],
+  ['Ryan Martin','Glasgow',21.0,100,21.0]
+];
+
+new Chart(document.getElementById('c_advisor'),{type:'bar',data:{
+  labels:advisors.map(a=>a[0]),
+  datasets:[
+    {label:'Actual AUM',data:advisors.map(a=>a[2]),backgroundColor:advisors.map(a=>a[4]>=100?GR:a[4]>=90?AM:RD),borderRadius:3},
+    {label:'Target',data:advisors.map(a=>a[3]),type:'line',borderColor:'#555',borderDash:[4,3],borderWidth:1.5,pointRadius:0,fill:false,datalabels:{display:false}}
+  ]
+},options:{...base,indexAxis:'y',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}},datalabels:{display:(ctx)=>ctx.datasetIndex===0,anchor:'end',align:'end',offset:3,formatter:v=>'£'+v+'M',color:'#333',font:{size:9.5,weight:'600'}}},layout:{padding:{right:52}},scales:{x:{display:false,grid:{display:false}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+
+// Tier
+new Chart(document.getElementById('c_tier'),{type:'bar',data:{
+  labels:['On/Above Target','Within 10%','Below Target'],
+  datasets:[{label:'Advisors',data:[7,1,17],backgroundColor:[GR,AM,RD],borderRadius:5,barThickness:52}]
+},options:{...base,plugins:{legend:{display:false},datalabels:{anchor:'end',align:'end',offset:3,formatter:v=>v+' advisors',color:'#333',font:{size:11,weight:'600'}}},layout:{padding:{top:26}},scales:{x:{grid:{display:false}},y:{display:false,grid:{display:false}}}}});
+
+// Advisor table
+const tb=document.getElementById('adv_tbody');
+advisors.forEach(a=>{
+  const s=a[4]>=100?`<span class="pill pg">On/Above</span>`:a[4]>=90?`<span class="pill pa">Within 10%</span>`:`<span class="pill pr">Below</span>`;
+  const c=a[4]>=100?'g':a[4]>=90?'a':'r';
+  tb.innerHTML+=`<tr><td><strong>${a[0]}</strong></td><td>${a[1]}</td><td>£${a[2]}M</td><td>£${a[3]}M</td><td><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:700;min-width:34px">${a[4]}%</span><div class="bar" style="flex:1"><div class="bf ${c}" style="width:${Math.min(a[4],100)}%"></div></div></div></td><td>${s}</td></tr>`;
+});
+</script>
+</body>
+</html>
